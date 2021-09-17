@@ -22,3 +22,9 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco
+          path: build/reports/jacoco/test/**
+          retention-days: 2
