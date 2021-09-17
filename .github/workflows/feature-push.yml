@@ -32,5 +32,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: runnable
-          path: build/libs/teans-*-SNAPSHOT.jar
+          path: build/libs/teams-*-SNAPSHOT.jar
           retention-days: 2
