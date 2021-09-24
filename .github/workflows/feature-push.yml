@@ -39,10 +39,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: keeonline/feature-test/teams:latest
-      - name: Upload runnable jar
-        uses: actions/upload-artifact@v2
-        with:
-          name: runnable
-          path: build/libs/teams-*-SNAPSHOT.jar
-          retention-days: 2
+          tags: feature-test/teams:latest
