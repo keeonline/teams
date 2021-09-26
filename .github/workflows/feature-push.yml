@@ -28,17 +28,25 @@ jobs:
           name: jacoco
           path: build/reports/jacoco/test/**
           retention-days: 2
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
         with:
-          username: ${{ secrets.DOCKER_USER_NAME }}
-          password: ${{ secrets.DOCKER_USER_PWD }}
-      - name: Create docker image from build
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          tags: keeonline/feature-test/teams:latest
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.DOCKER_AUTH_TOKEN }}
+          languages: [ 'java' ]
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     username: ${{ secrets.DOCKER_USER_NAME }}
+      #     password: ${{ secrets.DOCKER_USER_PWD }}
+      # - name: Create docker image from build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: Dockerfile
+      #     push: true
+      #     tags: keeonline/feature-test/teams:latest
+      #     secrets: |
+      #       GIT_AUTH_TOKEN=${{ secrets.DOCKER_AUTH_TOKEN }}
